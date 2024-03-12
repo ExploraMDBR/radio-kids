@@ -1,5 +1,7 @@
 # Radio Kids
 
+![cover](images/logo.png)
+
 *Radio Kids* is a web application that emulate the functioning of a simplified radio boot featuring the **selection of a sound file** from a library, the **recording thorugh mic device** and allowing to **play** both sequentially.
 
 - [Introduction](#introduction)
@@ -54,6 +56,8 @@ python3 main.py # prints localhost:<port> to console
 
 *Radio kids* is designed as an installation. It features a full size booth (equipped with an interactive console, speakers and other props).
 The kids can experiment with audio, recording and music, in an immersive experience enhanced by the storytelling of being a DJ or a radio-speaker.
+
+![Project image](images/example.png)
 
 ### Related Explora's project
 
