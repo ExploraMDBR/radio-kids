@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>RAI Radio</title>
+	<script>
+		if (location.hostname !== "localhost" && location.hostname !== "127.0.0.1"){
+			var pass_entered;
+			var password="leoilpiubello";
+
+			while (pass_entered!=password) {
+				pass_entered=prompt('Please enter the password:','');
+			}
+		}
+
+	</script>
+	<script src="jquery-3.4.1.js"></script>
+	<script src="p5/p5.js"></script>
+	<script src="p5/addons/p5.sound.js"></script>
+	<script src="recorder.js"></script>
+	<script src="dom.js"></script>
+	<script src="main.js"></script>
+	<style>
+		html, body{
+			margin: 0;
+			padding: 0;
+			font-family: sans-serif;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+
+		}
+
+		.screen{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+		}
+
+		.screen *{
+			position: static;
+		}
+
+		.stop-all{
+			display: block;
+			margin: 10px;
+			/*background-color: pink;*/
+		}
+		/*
+		.stop-all.enabled{
+			background-color: grey;
+			}*/
+
+			#stats{
+				position: fixed;
+				top:0;
+				right: 0;
+				background-color: #88888899;
+				min-width: 30%;
+				min-height: 30%;
+				padding: 10px;
+			}
+
+			.backplate{
+				width: 100%;
+				position: absolute;
+				z-index: -10;
+			}
+
+
+			.hidden {
+				display: none;
+			}
+
+			.btn-next{
+				position: fixed;
+				bottom: 10px;
+				right: 10px;
+				background-color: transparent;
+				border: none;
+				width: 90px;
+				height: 90px;
+				cursor: pointer;
+			}
+
+			.btn-next:disabled{
+				opacity: 0;
+			}
+
+			.btn-arrow-next {
+			    width: 100%;
+			}
+
+			#transition {
+				width: 100%;
+				height: 100%;
+				z-index: 3;
+				background-color: white;
+				position: absolute;
+			}
+
+			/*VIDEO*/
+			.video_cornice{
+				position: relative;
+				width: 36%;
+				height: 80%;
+				margin: 6%;
+			}
+
+			.video_cornice img{
+				position: absolute;
+				width: 100%;
+			}
+
+			.screen video{
+				width: 79%;
+				margin: 11%;
+				margin-top: 67%;
+			}
+
+
+			#scegli .video_cornice{
+				width: 22%;
+				margin: 0 3%;
+				position: absolute;
+				top: 14%;
+			}
+
+			#seipronto .video_cornice{
+				margin: 1% 6%;
+			}
+
+			/*SONGS CARDS*/
+			#songs-container {
+				display: flex;
+				position: absolute;
+				width: 73%;
+				height: 86%;
+				right: 2%;
+				flex: content;
+				flex-wrap: wrap;
+				justify-content: space-evenly;
+				align-content: space-around;
+			}
+			#songs-container > div {
+				width: 16%;
+				height: 40%;
+				margin: 0 2%;
+			}
+
+			.song_card button{
+				background-color: transparent;
+				border: none;
+				cursor: pointer;
+				display: inline-block;
+				height: 50px;
+			}
+
+			.song_card button:disabled{
+				opacity: 0.4;
+			}
+
+			.song_card .btn-song-ctrl{
+				height: 100%;
+			}
+
+			.song-card img {
+				width: auto;
+				height: 100%;
+				pointer-events: none;
+			}
+
+			.song_card{
+				display: inline-block;
+				background-color: #b4f2f2;
+				padding: 20px;
+				border: 7px solid #5c82bd;
+				box-shadow: 2px 10px 10px #0000006b;
+				border-radius: 17px; 
+			}
+
+			.song_card.selected_song{
+				border-color: #ff8f00;
+				background-color: #fff28a;
+				box-shadow: 4px 15px 15px #00000091;
+
+			}
+
+			.song_card .song_thumb{
+			    max-width: 179px;
+			    margin: 30px auto;
+			    display: block;
+			}
+
+			#master_song_card{
+				display: none;
+			}
+
+			#single-song-container img {
+			    width: 345px;
+			    max-width: initial;
+			}
+
+			#single-song-container{
+			    margin: 50px;
+			    position: absolute;
+			    top: 16%;
+			    right: 18%;
+			
+			}
+
+			#single-song-container p{
+				font-size: 24px;
+			}
+
+			/*INTRO*/
+
+			#intro-controls,
+			#final-controls {
+				position: absolute;
+				width: 40%;
+				height: 80%;
+				right: 0;
+				top:20%;
+			}
+
+			#final-controls {
+				right: 18%;
+			}
+
+			#intro-controls button,
+			#final-controls button{
+				position: absolute;
+				background-color: transparent;
+				border: none;
+				cursor: pointer;
+				margin: 50px;
+				width: 200px;
+			}
+
+			#intro-controls #play-test{
+				margin-left: 350px;
+			}
+
+			#intro-controls button img{
+				width: 100%;
+			}
+
+			#intro-controls button:disabled{
+				opacity: 0.4;
+			}
+
+			#final-controls img{
+				width: 250px;
+				
+			}
+
+			#intro-controls canvas {
+				margin: 40px;
+				width: 221px;
+				position: absolute;
+				z-index: -10;
+				margin-top: 33px;
+			}
+			
+			#intro-controls #waveform-canvas,
+			#rec-controls #waveform-canvas{
+				margin-top: 300px;
+				margin-left: 0px;
+				width: 80%;
+				border-radius: 14px;
+				padding: 7px;
+				border: 2px solid #22b8e6;
+			}
+
+			#play #waveform-canvas {
+				position: absolute;
+				width: 100%;
+				z-index: -20;
+				margin-top: 13%;
+			}
+
+			#seipronto #waveform-canvas{
+				margin-top: 450px;
+				margin-left: 0px;
+				position: absolute;
+				right: 294px;
+				border-color: #ea7265;
+
+			}
+
+			/*REC*/
+			#rec-controls {
+				position: absolute;
+				width: 40%;
+				height: 80%;
+				right: 128px;
+				top:10%;
+			}
+
+			#rec-controls button{
+				position: absolute;
+				background-color: transparent;
+				border: none;
+				cursor: pointer;
+				width: 265px;
+			}
+
+			#rec-controls button img{
+				width: 100%;
+				position: absolute;
+				left:0;
+			}
+
+
+			#rec-controls button:disabled .btn-rec-off{
+				display: none;
+			}
+
+			#rec-controls #progress-canvas {
+				top: -10px;
+				width: 252px;
+				z-index: -10;
+				left: 8px;
+				position: absolute;
+				top: -10px;
+				margin: auto;
+			}
+
+
+
+		</style>
+	</head>
+	<body>
+		<div id="transition"></div>
+		<div id="stats"><pre></pre></div>
+		<div class="screen hidden" id="invito">
+			<img class="backplate" src="bg/00-START.png" alt="">
+			<button class="btn-next"><img class="btn-arrow-next" src="arrow.png"/></button>
+		</div>
+		<div class="screen hidden" id="scopo">
+			<img class="backplate" src="bg/01-DJ.png"  alt="">
+			<div class="video_cornice">
+				<img src="radio_cornice.png" alt="">
+				<video src="video/DJ_EXPLORA_02.mp4"></video>
+			</div>
+			<button class="btn-next"><img class="btn-arrow-next" src="arrow.png"/></button>
+		</div>
+		<div class="screen hidden" id="scegli">
+			<img class="backplate" src="bg/02-Brano.png" alt="">
+			<div id="songs-container"></div>
+			<div class="video_cornice">
+				<img src="radio_cornice.png" alt="">
+				<video class="vid-same-screen" src="video/DJ_EXPLORA_03.mp4"></video>
+			</div>
+			<button class="stop-all hidden" disabled="">STOP PLAYBACK</button>
+			<button class="btn-next"><img class="btn-arrow-next" src="arrow.png"/></button>
+		</div>
+		<div class="screen hidden" id="questa">
+			<img class="backplate" src="bg/03-Scelto.png" alt="">
+			<div class="video_cornice">
+				<img src="radio_cornice.png" alt="">
+				<video src="video/DJ_EXPLORA_04.mp4"></video>
+			</div>
+			<div id="single-song-container"></div>
+			<button class="btn-next"><img class="btn-arrow-next" src="arrow.png"/></button>
+		</div>
+		<div class="screen hidden" id="intro">
+			<img class="backplate" src="bg/04-INTRO.png"alt=""> 
+			<div id="intro-controls">
+				<button id="test-record"><img src="btn-rec.png"/></button>
+				<button id="play-test" disabled=""><img src="btn-play.png"/></button>
+			</div>
+			<div class="video_cornice">
+				<img src="radio_cornice.png" alt="">
+				<video class="vid-same-screen" src="video/DJ_EXPLORA_08.mp4"></video>
+			</div>
+			<button class="btn-next"><img class="btn-arrow-next" src="arrow.png"/></button>
+
+		</div>
+		<div class="screen hidden" id="seipronto">
+			<img class="backplate" src="bg/05-Onda.png" alt="">
+			<div class="video_cornice">
+				<img src="radio_cornice.png" alt="">
+				<video class="vid-same-screen" src="video/DJ_EXPLORA_10.mp4"></video>
+			</div>
+			<div id="rec-controls">
+				<button id="record">
+					<img class="btn-rec-on" src="btn-rec-RED-on.png" alt="">
+					<img class="btn-rec-off" src="btn-rec-RED.png" alt="">
+				</button>
+			</div>
+		</div>
+		<div class="screen hidden" id="play">
+			<div id="big_waveform"></div>
+			<img class="backplate" src="bg/07-OnAIR.png" alt="">
+		</div>
+		<div class="screen hidden"id="finale">
+			<img class="backplate" src="bg/08-END.png" alt="">
+			<div class="video_cornice">
+				<img src="radio_cornice.png" alt="">
+				<video class="vid-same-screen" src="video/DJ_EXPLORA_11.mp4"></video>
+			</div>
+			<div id="final-controls">
+				<button id="play-final" disabled=""><img src="btn-play.png"/></button>
+			</div>
+			<button class="btn-next"><img class="btn-arrow-next" src="arrow.png"/></button>
+		</div>
+
+		<div id="master_song_card" class="song_card">
+			<img class="song_thumb" src="" alt="">
+			<p></p>
+			<button class="song_play"><img class="btn-song-ctrl" src="btn-play.png"/></button>
+			<button class="song_select"><img class="btn-song-ctrl" src="seleziona.png" alt=""></button>
+		</div>
+	</body>
+</html>

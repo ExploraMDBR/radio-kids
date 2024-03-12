@@ -1,0 +1,14 @@
+Explora_Benvenuto.mov
+Explora_Complimentiesaluti.mov
+Explora_Inonda.mov
+Explora_Introduzione.mov
+Explora_ScegliCanzone-2.mov
+Explora_Scelta-3a.mov
+Explora_Scelta-3b.mov
+Explora_Scelta-3c.mov
+Explora_Scelta-3d.mov
+Explora_Scelta-3e.mov
+Explora_Scelta-3f.mov
+Explora_Scelta-3g.mov
+Explora_Scelta-3h.mov
+names.txt
