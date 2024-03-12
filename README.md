@@ -43,10 +43,10 @@ All the dependencies already come with the repository (in `./public` folder). Ju
 
 ```bash
 # Clone repo
-git clone <repo>
+git clone https://github.com/ExploraMDBR/radio-kids.git
 
 # Start local server
-python3 main.py # prints localhost:<port> to console
+python3 main.py # prints localhost:<port> to console (port number is randomly generated each launch)
 
 # The application is now running and can be accessed at localhost:<port>
 ```
