@@ -35,9 +35,9 @@ When user launches it, the application plays the recording and then the audio, m
 ## <a name="development"></a>Development
 
 ### Dependencies:
-- p5.js
-- p5.sound.js
-- jQuery  
+- [p5.js](https://github.com/processing/p5.js)
+- [p5.sound](https://github.com/processing/p5.js-sound)
+- [jQuery](https://github.com/jquery/jquery) 
   
 All the dependencies already come with the repository (in `./public` folder). Just clone it and run `main.py` :
 
