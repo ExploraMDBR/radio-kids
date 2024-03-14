@@ -11,11 +11,11 @@
 ## <a name="introduction"></a>Introduction
 
 *Radio kids* features a button interface to choose which action to perform, a recording system and an audio player system.
-The application is based on **progessive interfaces, each for an action** (read General use flow for more informations)
+The application is based on **progessive interfaces, each for an action** (read [How it works](#how-it-works) for more informations)
 The user can record his voice and to choose a sound file.
 When user launches it, the application plays the recording and then the audio, mimicking a radio speaker.
 
-### How it works
+### <a name="how-it-works"></a>How it works
 
 1. Start screen
 2. Instruction screen
