@@ -1,6 +1,8 @@
 # Radio Kids
 
-![cover](images/logo.png)
+<img width="200" alt="project logo" src="images/logo.png">
+
+[![ExploraBadge](https://img.shields.io/badge/-Explora-eb5c2f)](https://mdbr.it/en/) [![Web](https://img.shields.io/badge/-Web_app-0f4175)](https://en.wikipedia.org/wiki/Web_application)
 
 *Radio Kids* is a web application that emulate the functioning of a simplified radio boot featuring the **selection of a sound file** from a library, the **recording thorugh mic device** and allowing to **play** both sequentially.
 
